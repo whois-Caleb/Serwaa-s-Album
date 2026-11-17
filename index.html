@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5f7ef">
+  <meta name="description" content="A birthday album made with love for Serwaa, my best friend.">
+  <title>For Serwaa, with love</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,500;9..144,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="wordmark" href="#top" aria-label="Serwaa's birthday album home">Helei<span>!</span></a>
+    <a class="header-link" href="#memories">Wheeee! <span aria-hidden="true">&#8595;</span></a>
+  </header>
+
+  <main>
+    <section class="hero" id="top" aria-labelledby="hero-title">
+      <img class="hero-photo" src="media/photo_4_2026-10-31_19-54-22.jpg" alt="Serwaa smiling for the camera" fetchpriority="high">
+      <div class="hero-shade"></div>
+      <div class="hero-copy">
+        <p class="eyebrow"><span class="eyebrow-dot"></span> This is for you twin!!</p>
+        <h1 id="hero-title">Happy birthday,<br><em>Serwaa!</em></h1>
+        <p class="hero-message">For all the laughs, all the little moments, the GLORIOUS banana bread and every reason you're so loved. Today is all about you.</p>
+        <a class="hero-button" href="#memories">Through the looking glass!! <span aria-hidden="true">&#8599;</span></a>
+      </div>
+      <p class="hero-side-note" aria-hidden="true">GO SHORTY,   IT'S YOUR BIRTHDAY!</p>
+      <div class="hero-stamp" aria-hidden="true"><span>MOST</span><strong>AMAZING</strong><span>FRIEND</span></div>
+    </section>
+
+    <section class="memory-section" id="memories" aria-labelledby="memory-title">
+      <div class="section-heading">
+        <div>
+          <p class="section-kicker">Hehehe (Evil laugh)</p>
+          <h2 id="memory-title">The good <em>bits.</em></h2>
+        </div>
+        <p class="section-note">I had so much fun making this, hehe.<br>Wish I had more embarassing pics fr.</p>
+      </div>
+
+      <div class="gallery-tools">
+        <p class="media-count" id="media-count" aria-live="polite"></p>
+        <div class="filters" role="group" aria-label="Filter album items">
+          <button class="filter-button" type="button" data-filter="all" aria-pressed="true">All</button>
+          <button class="filter-button" type="button" data-filter="photo" aria-pressed="false">Photos</button>
+          <button class="filter-button" type="button" data-filter="video" aria-pressed="false">Videos</button>
+        </div>
+      </div>
+
+      <div class="gallery" id="gallery" aria-label="Birthday album"></div>
+    </section>
+
+    <section class="birthday-note" aria-labelledby="note-title">
+      <div class="note-mark" aria-hidden="true">S<span>!</span></div>
+      <div class="note-copy">
+        <p class="section-kicker">One more thing</p>
+        <h2 id="note-title">I'm so glad<br>you're <em>my person.</em></h2>
+        <p>Wishing you a year full of joy, good surprises, fine boys (and girls!) and all the love you give coming right back to you. Happy birthday, Ben 10.</p>
+      </div>
+      <p class="note-signoff">All my love <span aria-hidden="true">&#10084;</span></p>
+    </section>
+  </main>
+
+  <footer class="site-footer"><span>Made for Serwaa</span><span>With all my love, always.</span></footer>
+
+  <dialog class="viewer" id="media-viewer" aria-label="Album item viewer">
+    <div class="viewer-topbar">
+      <p class="viewer-count" id="viewer-count"></p>
+      <button class="icon-button close-viewer" id="close-viewer" type="button" aria-label="Close viewer">&times;</button>
+    </div>
+    <div class="viewer-content">
+      <button class="viewer-nav previous" id="previous-item" type="button" aria-label="Previous item">&#8592;</button>
+      <div class="viewer-media" id="viewer-media"></div>
+      <button class="viewer-nav next" id="next-item" type="button" aria-label="Next item">&#8594;</button>
+    </div>
+    <p class="viewer-caption" id="viewer-caption"></p>
+  </dialog>
+
+  <script src="script.js"></script>
+</body>
+</html
