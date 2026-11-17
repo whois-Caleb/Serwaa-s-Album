@@ -142,10 +142,9 @@ function renderGallery(filter = "all") {
 
   visibleMedia.forEach((item, index) => {
     const card = document.createElement("button");
-    const useVideoPreview = item.type === "video" && !window.matchMedia("(max-width: 600px)").matches;
     const previewMedia = item.type === "photo"
       ? document.createElement("img")
-      : useVideoPreview ? document.createElement("video") : null;
+      : document.createElement("video");
     const preview = document.createElement("span");
     const caption = document.createElement("span");
     const kind = document.createElement("span");
@@ -161,11 +160,19 @@ function renderGallery(filter = "all") {
       previewMedia.src = item.src;
       previewMedia.muted = true;
       previewMedia.playsInline = true;
+      previewMedia.setAttribute("webkit-playsinline", "");
+      previewMedia.disablePictureInPicture = true;
       previewMedia.preload = "metadata";
       previewMedia.tabIndex = -1;
       previewMedia.setAttribute("aria-hidden", "true");
-      previewMedia.addEventListener("loadedmetadata", () => {
-        previewMedia.currentTime = Math.min(0.1, previewMedia.duration / 2);
+      const showPreviewFrame = () => {
+        if (Number.isFinite(previewMedia.duration) && previewMedia.duration > 0) {
+          previewMedia.currentTime = Math.min(0.1, previewMedia.duration / 2);
+        }
+      };
+      previewMedia.addEventListener("loadedmetadata", showPreviewFrame, { once: true });
+      previewMedia.addEventListener("loadeddata", () => {
+        showPreviewFrame();
       }, { once: true });
     }
     preview.className = "media-preview";
@@ -193,6 +200,8 @@ function openViewer(index) {
   activeIndex = index;
   updateViewer();
   viewer.showModal();
+  const video = viewerMedia.querySelector("video");
+  if (video) video.play().catch(() => {});
 }
 
 function updateViewer() {
@@ -204,12 +213,12 @@ function updateViewer() {
   if (item.type === "video") {
     const video = document.createElement("video");
     const playButton = document.createElement("button");
-    const shouldAutoplay = !window.matchMedia("(max-width: 600px)").matches;
 
     video.src = item.src;
     video.controls = true;
-    video.autoplay = shouldAutoplay;
+    video.autoplay = true;
     video.playsInline = true;
+    video.setAttribute("webkit-playsinline", "");
     playButton.type = "button";
     playButton.className = "viewer-play";
     playButton.setAttribute("aria-label", "Play video");
@@ -222,7 +231,7 @@ function updateViewer() {
       playButton.hidden = video.ended;
     });
     viewerMedia.append(video, playButton);
-    if (shouldAutoplay) video.play().catch(() => {});
+    video.play().catch(() => {});
     return;
   }
 
